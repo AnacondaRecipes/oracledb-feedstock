@@ -1,5 +1,5 @@
 {% set name = "oracledb" %}
-{% set version = "1.2.2" %}
+{% set version = "2.1.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,21 +7,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/oracledb-{{ version }}.tar.gz
-  sha256: dd9f63084e44642b484a46b2fcfb4fc921f39facf494a1bab00628fa6409f4fc
+  sha256: e2e817cfa6dff36c7131736f34e2aaec75d726fd38d1910d8318061a278228fa
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+  skip: true # [py<37]
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
   host:
     - python
-    - cython
+    - setuptools >=40.6.0
+    - wheel
+    - cython >=3.0
     - pip
   run:
     - python
@@ -38,9 +38,12 @@ test:
 about:
   home: https://oracle.github.io/python-oracledb
   summary: Python interface to Oracle Database
+  description: |
+    python-oracledb is a Python programming language extension module allowing Python programs to connect to Oracle Database. 
+    It is the renamed, new major release of the popular cx_Oracle driver.
   dev_url: https://github.com/oracle/python-oracledb
-  doc_url: https://python-oracledb.readthedocs.io/en/latest/
-  license: Apache-2.0
+  doc_url: https://python-oracledb.readthedocs.io
+  license: Apache-2.0 OR UPL-1.0
   license_family: Apache
   license_file:
     - LICENSE.txt
