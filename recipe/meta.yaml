@@ -43,7 +43,7 @@ about:
     It is the renamed, new major release of the popular cx_Oracle driver.
   dev_url: https://github.com/oracle/python-oracledb
   doc_url: https://python-oracledb.readthedocs.io
-  license: Apache-2.0
+  license: Apache-2.0 OR UPL-1.0
   license_family: Apache
   license_file:
     - LICENSE.txt
