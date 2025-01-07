@@ -1,5 +1,5 @@
 {% set name = "oracledb" %}
-{% set version = "2.1.1" %}
+{% set version = "2.5.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/oracledb-{{ version }}.tar.gz
-  sha256: e2e817cfa6dff36c7131736f34e2aaec75d726fd38d1910d8318061a278228fa
+  sha256: 63d17ebb95f9129d0ab9386cb632c9e667e3be2c767278cc11a8e4585468de33
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
-  skip: true # [py<37]
+  number: 0
+  skip: true # [py<38]
 
 requirements:
   build:
@@ -21,7 +21,7 @@ requirements:
     - python
     - setuptools >=40.6.0
     - wheel
-    - cython >=3.0
+    - cython
     - pip
   run:
     - python
