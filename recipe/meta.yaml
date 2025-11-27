@@ -16,13 +16,14 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
   host:
     - python
+    - pip
     - setuptools >=77.0.0
     - wheel
-    - cython >=3.1,<4.dev0
-    - pip
+    - cython >=3.1,<4
   run:
     - python
     - cryptography >=3.2.1
@@ -31,10 +32,13 @@ requirements:
 test:
   imports:
     - oracledb
-  commands:
-    - pip check
   requires:
     - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # Tests require connection to DB
+    # - pytest -v tests
 
 about:
   home: https://oracle.github.io/python-oracledb
